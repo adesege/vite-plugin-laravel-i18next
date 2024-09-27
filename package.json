@@ -1,4 +1,36 @@
 {
   "name": "vite-plugin-laravel-i18next",
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.0",
+  "version": "0.0.1",
+  "description": "A Vite plugin to convert Laravel translation files to i18next-compatible JSON files",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adesege/vite-plugin-laravel-i18next.git"
+  },
+  "keywords": [
+    "vite",
+    "plugin",
+    "laravel",
+    "i18next",
+    "translation",
+    "internationalization"
+  ],
+  "author": "Temitayo Fadojutimi <me@temitayo.dev>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^22.7.4",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "php-parser": "^3.1.5",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
 }

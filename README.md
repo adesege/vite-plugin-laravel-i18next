@@ -1,0 +1,1 @@
+# laravel-i18next

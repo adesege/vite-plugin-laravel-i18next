@@ -1,4 +1,4 @@
 {
-  "name": "laravel-i18next",
+  "name": "vite-plugin-laravel-i18next",
   "packageManager": "yarn@4.5.0"
 }

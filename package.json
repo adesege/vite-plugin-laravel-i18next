@@ -8,7 +8,6 @@
   "scripts": {
     "test:unit": "vitest run --coverage",
     "build": "rm -rf dist && tsc -p tsconfig.build.json && yarn postbuild",
-    "prepublishOnly": "yarn build",
     "postbuild": "cp -r package.json ./dist && (cp -r npm-shrinkwrap.json ./dist) 2>/dev/null || : && cp -r README.md ./dist && cp -r LICENSE ./dist && cp -r CHANGELOG.md ./dist 2>/dev/null || : && cp -r yarn.lock ./dist",
     "test:e2e": "playwright test",
     "dev:test": "vite --config tests/e2e/app/vite.config.ts"
@@ -27,12 +26,15 @@
   ],
   "author": "Temitayo Fadojutimi <me@temitayo.dev>",
   "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "php-parser": "^3.1.5"
+  },
   "devDependencies": {
     "@playwright/test": "^1.47.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.1",
     "@types/fs-extra": "^11.0.4",
     "@types/glob": "^8.1.0",
     "@types/node": "^22.7.4",
@@ -42,10 +44,7 @@
     "@vitest/coverage-v8": "^2.1.1",
     "chokidar": "^4.0.1",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "fs-extra": "^11.2.0",
-    "glob": "^11.0.0",
     "i18next": "^23.15.1",
-    "php-parser": "^3.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.2",
@@ -54,5 +53,9 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vitest": "^2.1.1"
+  },
+  "peerDependencies": {
+    "chokidar": ">=4",
+    "vite": ">=5"
   }
 }

@@ -99,26 +99,32 @@ function ValidationMessage() {
 Laravel i18next supports Laravel's pluralization rules and converts them to i18next compatible format. Here's an example of how to use pluralization in a React component:
 
 ```tsx
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-function AppleCounter({ count }) {
-  const { t } = useTranslation("common");
-
-  return <div>{t("apples", { count })}</div>;
+function Fruits() {
+  const { t } = useTranslation("fruits");
+  return (
+    <div>
+      <h1>{t("title")}</h1>
+      <ul>
+        <li>{t("apples", { count: 0 })}</li>
+        <li>{t("apples", { count: 1 })}</li>
+        <li>{t("apples", { count: 2 })}</li>
+        <li>{t("apples", { count: 5 })}</li>
+      </ul>
+    </div>
+  );
 }
-
-// Usage
-<AppleCounter count={0} /> // Outputs: There are no apples
-<AppleCounter count={5} /> // Outputs: There are some apples
-<AppleCounter count={25} /> // Outputs: There are many apples
 ```
 
 The corresponding Laravel translation file might look like this:
 
 ```php
-// resources/lang/en/common.php
+// resources/lang/en/fruits.php
 return [
-  'apples' => '{0} There are no apples|[1,19] There are some apples|[20,] There are many apples',
+  'title' => 'Fruits',
+  'apples' => '{0} No apples|{1} One apple|{2} A couple of apples|[3,] Many apples',
 ];
 ```
 
@@ -128,33 +134,28 @@ return [
 
 The package handles both Laravel and i18next style interpolations. Here's an example of how to use interpolation in a React component:
 
-```typescript
+```jsx
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-function Welcome({ name }) {
-  const { t } = useTranslation("common");
-
-  return <div>{t("welcome", { name })}</div>;
+function Greeting() {
+  const { t } = useTranslation("greeting");
+  return (
+    <div>
+      <p>{t("hello", { name: "John" })}</p>
+      <p>{t("balance", { amount: "100" })}</p>
+    </div>
+  );
 }
-
-function Balance({ amount }) {
-  const { t } = useTranslation("common");
-
-  return <div>{t("balance", { amount })}</div>;
-}
-
-// Usage
-<Welcome name="John" /> // Outputs: Welcome, John!
-<Balance amount="$100" /> // Outputs: Your balance is $100
 ```
 
 The corresponding Laravel translation file might look like this:
 
 ```php
-// resources/lang/en/common.php
+// resources/lang/en/greeting.php
 return [
-  'welcome' => 'Welcome, :name!',
-  'balance' => 'Your balance is {{amount}}',
+  'hello' => 'Hello, :name!',
+'balance' => 'Your balance is $:amount',
 ];
 ```
 

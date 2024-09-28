@@ -9,6 +9,7 @@
     "test:unit": "vitest run --coverage",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "yarn build",
+    "postversion": "cp -r package.json ./dist && cp -r npm-shrinkwrap.json ./dist && cp -r README.md ./dist && cp -r LICENSE ./dist && cp -r CHANGELOG.md ./dist",
     "test:e2e": "playwright test",
     "dev:test": "vite --config tests/e2e/app/vite.config.ts"
   },
@@ -28,7 +29,7 @@
   "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.47.2",
-    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-v8": "^2.1.1",
     "chokidar": "^4.0.1",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
     "i18next": "^23.15.1",
@@ -48,7 +50,7 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.2",
     "react-router-dom": "^6.26.2",
-    "semantic-release": "^19.0.5",
+    "semantic-release": "^24.1.2",
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vitest": "^2.1.1"

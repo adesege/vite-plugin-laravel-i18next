@@ -5,10 +5,14 @@ function convertPhpArrayToJs(arrayNode: any): any {
 
   for (const item of arrayNode.items) {
     let key;
-    if (item.key.kind === 'string' || item.key.kind === 'number') {
+    if (item.key && item.key.kind === 'string') {
       key = item.key.value;
+    } else if (item.key === null) {
+      // This is likely a numeric key
+      key = Object.keys(result).length.toString();
     } else {
-      continue; // Unsupported key type
+      // Skip other unsupported key types
+      continue;
     }
 
     const value = parsePhpValue(item.value);

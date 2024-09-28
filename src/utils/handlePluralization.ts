@@ -1,69 +1,54 @@
-type PluralForm = 'zero' | 'one' | 'other' | string & {};
-type TranslationValue = string | Record<PluralForm, string>;
-type Translations = Record<string, TranslationValue>;
+type PluralRule = {
+  condition: string;
+  translation: string;
+};
 
-function isPluralizable(value: TranslationValue): value is string {
-  return typeof value === 'string' && value.includes('|');
-}
+type PluralRuleCondition = string;
 
-function parsePluralForms(value: string): Record<PluralForm, string> {
-  const parts = value.split('|');
-  return parts.reduce<Record<PluralForm, string>>((pluralForms, part) => {
-    const { form, text } = parsePluralPart(part, pluralForms);
-    if (Array.isArray(form)) {
-      form.forEach(f => {
-        pluralForms[f] = text;
-      });
+export default function handlePluralization(obj: Record<string, unknown>, lang: string): Record<string, unknown> {
+  return Object.entries(obj).reduce((result, [key, value]) => {
+    if (typeof value === 'string' && value.includes('|')) {
+      const pluralRules = parsePluralRules(value);
+      Object.assign(result, applyPluralRules(key, pluralRules, lang));
     } else {
-      pluralForms[form] = text;
+      result[key] = value;
     }
-    return pluralForms;
-  }, {} as Record<PluralForm, string>);
+    return result;
+  }, {} as Record<string, unknown>);
 }
 
-function parsePluralPart(part: string, pluralForms: Record<PluralForm, string>): { form: PluralForm | PluralForm[], text: string } {
-  const exactMatch = part.match(/^\{(\d+)\}\s*(.*)$/);
-  const rangeMatch = part.match(/^\[(\d+),(\*|\d+)\]\s*(.*)$/);
-  const colonMatch = part.split(':').map(s => s.trim());
-
-  if (exactMatch) {
-    return handleExactMatch(exactMatch);
-  } else if (rangeMatch) {
-    return handleRangeMatch(rangeMatch);
-  } else if (colonMatch.length === 2) {
-    return handleColonMatch(colonMatch);
-  } else {
-    return handleSimplePlural(part.trim(), pluralForms);
+function parsePluralRules(value: string): PluralRule[] {
+  const parts = value.split('|');
+  if (parts.length === 2) {
+    return [
+      { condition: '{1}', translation: parts[0].trim() },
+      { condition: 'other', translation: parts[1].trim() }
+    ];
   }
+  return parts.map(parsePluralRule).filter((rule): rule is PluralRule => rule !== null);
 }
 
-function handleExactMatch([, count, text]: RegExpMatchArray): { form: PluralForm, text: string } {
-  return { form: count === '1' ? 'one' : count, text: text.trim() };
+function parsePluralRule(part: string): PluralRule | null {
+  const match = part.match(/^\s*(\{[^}]+\}|\[[^\]]+\])\s*(.+)/);
+  if (!match) return null;
+  const [, condition, translation] = match;
+  return { condition, translation: translation.trim() };
 }
 
-function handleRangeMatch([, start, end, text]: RegExpMatchArray): { form: PluralForm[], text: string } {
-  if (end === '*') {
-    return { form: ['other'], text: text.trim() };
-  }
-  const range = Array.from({ length: Number(end) - Number(start) + 1 }, (_, i) => String(Number(start) + i));
-  return { form: range, text: text.trim() };
+function applyPluralRules(key: string, rules: PluralRule[], lang: string): Record<string, string> {
+  return rules.reduce((result, { condition, translation }) => {
+    const suffix = getPluralSuffix(condition, lang);
+    if (suffix) {
+      result[`${key}_${suffix}`] = translation;
+    }
+    return result;
+  }, {} as Record<string, string>);
 }
 
-function handleColonMatch([count, text]: string[]): { form: PluralForm, text: string } {
-  return { form: count === '1' ? 'one' : count, text };
+function getPluralSuffix(condition: PluralRuleCondition, lang: string): string | null {
+  if (condition === '{0}' || condition === '[0]') return 'zero';
+  if (condition === '{1}' || condition === '[1]') return 'one';
+  if (lang === 'ar' && (condition === '{2}' || condition === '[2]')) return 'two';
+  if (condition.includes(',') || condition === 'other') return 'other';
+  return null;
 }
-
-function handleSimplePlural(text: string, pluralForms: Record<PluralForm, string>): { form: PluralForm, text: string } {
-  return { form: 'one' in pluralForms ? 'other' : 'one', text };
-}
-
-function handlePluralization(translations: Translations): Translations {
-  return Object.fromEntries(
-    Object.entries(translations).map(([key, value]) => [
-      key,
-      isPluralizable(value) ? parsePluralForms(value) : value
-    ])
-  );
-}
-
-export default handlePluralization;

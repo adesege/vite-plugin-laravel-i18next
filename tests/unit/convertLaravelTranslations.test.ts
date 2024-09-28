@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import convertLaravelTranslations from '../src/utils/convertLaravelTranslations';
+import convertLaravelTranslations from '../../src/utils/convertLaravelTranslations';
 
 const fixturesPath = path.join(__dirname, 'fixtures');
 const outputPath = path.join(__dirname, 'output');
@@ -42,36 +42,36 @@ describe('convertLaravelTranslations', () => {
     );
 
     const result = await fs.readJson(path.join(outputPath, 'en', 'messages.json'));
+
     expect(result).toEqual({
-      apples: {
-        '0': 'No apples',
-        'one': 'One apple',
-        'other': 'There are many apples'
-      },
-      bananas: {
-        '0': 'There are no bananas',
-        'one': 'There is one banana',
-        'other': 'There are many bananas'
-      },
-      cars: {
-        '0': 'No cars',
-        '1': 'Few cars',
-        '2': 'Few cars',
-        '3': 'Few cars',
-        '4': 'Few cars',
-        '5': 'Five cars',
-        'other': 'Many cars'
-      },
-      fruits: {
-        '0': 'No fruits',
-        'one': 'One fruit',
-        '2': 'A couple of fruits',
-        '3': 'Many fruits'
-      },
-      animals: {
-        'one': 'One animal',
-        'other': 'Multiple animals'
-      }
+      "animals_one": "One animal",
+      "animals_other": "Multiple animals",
+      "apples_one": "One apple",
+      "apples_other": "There are many apples",
+      "apples_zero": "No apples",
+      "bananas_one": "There is one banana",
+      "bananas_other": "There are many bananas",
+      "bananas_zero": "There are no bananas",
+      "cars_other": "Many cars",
+      "cars_zero": "No cars",
+    });
+
+    const arabicResult = await fs.readJson(path.join(outputPath, 'ar', 'messages.json'));
+
+    expect(arabicResult).toEqual({
+      "animals_one": "حيوان واحد",
+      "animals_other": "حيوانات متعددة",
+      "apples_one": "تفاحة واحدة",
+      "apples_other": "توجد تفاحات متعددة",
+      "apples_zero": "لا توجد تفاحات",
+      "bananas_one": "توجد موزة واحدة",
+      "bananas_other": "توجد موزات متعددة",
+      "bananas_zero": "لا توجد موزات",
+      "cars_other": "عديد من السيارات",
+      "cars_zero": "لا توجد سيارات",
+      "fruits_one": "فاكهة واحدة",
+      "fruits_two": "زوج من الفواكه",
+      "fruits_zero": "لا توجد فواكه",
     });
   });
 
@@ -100,7 +100,7 @@ describe('convertLaravelTranslations', () => {
       outputPath
     );
 
-    const result = await fs.readJson(path.join(outputPath, 'en', 'common.json'));
+    const result = await fs.readJson(path.join(outputPath, 'en', 'en.json'));
     expect(result).toEqual({
       'Welcome to our application': 'Welcome to our application',
       'Goodbye!': 'Goodbye!'

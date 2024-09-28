@@ -8,6 +8,10 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "declaration": true
+    "declaration": true,
+    "types": [
+      "vite/client",
+      "chokidar"
+    ]
   }
 }

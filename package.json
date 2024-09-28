@@ -7,9 +7,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test:unit": "vitest run --coverage",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && yarn postbuild",
     "prepublishOnly": "yarn build",
-    "postversion": "cp -r package.json ./dist && cp -r npm-shrinkwrap.json ./dist && cp -r README.md ./dist && cp -r LICENSE ./dist && cp -r CHANGELOG.md ./dist",
+    "postbuild": "cp -r package.json ./dist && (cp -r npm-shrinkwrap.json ./dist) 2>/dev/null || : && cp -r README.md ./dist && cp -r LICENSE ./dist && cp -r CHANGELOG.md ./dist 2>/dev/null || : && cp -r yarn.lock ./dist",
     "test:e2e": "playwright test",
     "dev:test": "vite --config tests/e2e/app/vite.config.ts"
   },

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import laravelI18nextPlugin from '../../../src/plugin';
+import laravelI18nextPlugin from '../../../src';
 
 export default defineConfig({
   plugins: [

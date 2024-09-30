@@ -13,6 +13,16 @@ Laravel i18next is a powerful Vite plugin that bridges the gap between Laravel's
 - Hot Module Replacement (HMR) support for seamless development
 - Export multiple translation files per language (namespaces)
 
+## Why i18next?
+
+i18next is a comprehensive internationalization framework that provides:
+
+- **Ease of Use**: Simple API and extensive documentation.
+- **Flexibility**: Supports various backends, including JSON, YAML, and more.
+- **Compatibility**: Works seamlessly with React, Vue, Angular, and other frameworks.
+- **Advanced Features**: Pluralization, interpolation, context, and more.
+- **Community Support**: Large community and active maintenance.
+
 ## Installation
 
 You can install the package via npm or yarn:
@@ -38,10 +48,10 @@ export default defineConfig({
   plugins: [
     laravelI18nextPlugin({
       laravelLangPath: path.resolve(
-        dirname,
+        __dirname,
         "../path/to/laravel/resources/lang"
       ),
-      outputPath: path.resolve(dirname, "./src/locales"),
+      outputPath: path.resolve(__dirname, "./src/locales"),
     }),
   ],
   // ... other configurations
@@ -200,4 +210,3 @@ This project is open-sourced software licensed under the [MIT license](https://o
 - [i18next Documentation](https://www.i18next.com/)
 - [i18next Namespaces Guide](https://www.i18next.com/principles/namespaces)
 - [React i18next Multiple Translation Files](https://react.i18next.com/guides/multiple-translation-files)
-- [Vite Plugin Development Guide](https://vitejs.dev/guide/api-plugin.html)

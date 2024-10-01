@@ -1,5 +1,12 @@
 # Laravel i18next Vite Plugin
 
+<a href="https://www.npmjs.com/package/vite-plugin-laravel-i18next">![npm](https://img.shields.io/npm/v/vite-plugin-laravel-i18next)</a>
+![Last Commit](https://img.shields.io/github/last-commit/adesege/vite-plugin-laravel-i18next)
+![npm Total Downloads](https://img.shields.io/npm/dt/vite-plugin-laravel-i18next)
+<a href="https://snyk.io/advisor/npm-package/vite-plugin-laravel-i18next">![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/adesege/vite-plugin-laravel-i18next)</a>
+<a href="https://github.com/adesege/vite-plugin-laravel-i18next/issues">![Issues](https://img.shields.io/github/issues/adesege/vite-plugin-laravel-i18next)</a>
+![npm peer dependency version](https://img.shields.io/npm/dependency-version/vite-plugin-laravel-i18next/peer/vite)
+
 Laravel i18next is a powerful Vite plugin that bridges the gap between Laravel's localization system and i18next, a popular internationalization framework for JavaScript. This plugin allows you to seamlessly convert Laravel translation files into a format compatible with i18next, enabling you to use your Laravel translations in your frontend applications.
 
 ## Features

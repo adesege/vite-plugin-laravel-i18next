@@ -23,7 +23,7 @@
     "package-lock.json"
   ],
   "scripts": {
-    "test:unit": "vitest run --coverage",
+    "test:unit": "npx vitest run --coverage",
     "build": "rm -rf dist && vite build",
     "test:e2e": "playwright test",
     "dev:test": "vite --config tests/e2e/app/vite.config.ts"

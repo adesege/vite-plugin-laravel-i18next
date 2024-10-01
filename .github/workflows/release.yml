@@ -20,7 +20,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
-        run: npm install --package-lock-only
+        run: npm install
       - name: Build
         run: npm run build
       - name: Semantic Release

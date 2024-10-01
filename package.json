@@ -43,7 +43,6 @@
   "author": "Temitayo Fadojutimi <me@temitayo.dev>",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
     "php-parser": "^3.1.5"
   },
@@ -61,6 +60,7 @@
     "chokidar": "^4.0.1",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "esbuild": "^0.24.0",
+    "fs-extra": "^11.2.0",
     "i18next": "^23.15.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

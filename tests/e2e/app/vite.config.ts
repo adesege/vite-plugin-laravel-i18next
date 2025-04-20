@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import laravelI18nextPlugin from '../../../src';
+import react from "@vitejs/plugin-react";
+import path from "path";
+import { defineConfig } from "vite";
+import laravelI18nextPlugin from "../../../src";
 
 export default defineConfig({
   plugins: [
     react(),
     laravelI18nextPlugin({
-      laravelLangPath: path.resolve(__dirname, '../fixtures/lang'),
-      outputPath: path.resolve(__dirname, 'src/locales'),
+      laravelLangPath: path.resolve(__dirname, "../fixtures/lang"),
+      outputPath: path.resolve(__dirname, "src/locales"),
     }),
   ],
   root: __dirname,
@@ -17,7 +17,17 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
+  },
+  // Add optimizeDeps for Vite 6
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-i18next",
+      "i18next",
+      "react-router-dom",
+    ],
   },
 });

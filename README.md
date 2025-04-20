@@ -19,6 +19,7 @@ Laravel i18next is a powerful Vite plugin that bridges the gap between Laravel's
 - Automatic conversion during development and build processes
 - Hot Module Replacement (HMR) support for seamless development
 - Export multiple translation files per language (namespaces)
+- Compatible with Vite 6+
 
 ## Why i18next?
 

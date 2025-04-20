@@ -55,7 +55,7 @@
     "@types/node": "^22.7.4",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@vitejs/plugin-react": "^4.4.1",
     "@vitest/coverage-v8": "^2.1.1",
     "chokidar": "^4.0.1",
     "conventional-changelog-conventionalcommits": "^8.0.0",
@@ -68,13 +68,13 @@
     "react-router-dom": "^6.26.2",
     "semantic-release": "^24.1.2",
     "typescript": "^5.6.2",
-    "vite": "^5.4.8",
+    "vite": "^6.0.0",
     "vite-plugin-dts": "^4.2.3",
-    "vite-plugin-static-copy": "^1.0.6",
+    "vite-plugin-static-copy": "^2.0.0",
     "vitest": "^2.1.1"
   },
   "peerDependencies": {
     "chokidar": ">=4",
-    "vite": ">=5"
+    "vite": ">=6"
   }
 }
